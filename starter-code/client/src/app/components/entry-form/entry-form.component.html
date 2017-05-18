@@ -1,0 +1,26 @@
+<div class="container">
+<form class="form-signin" (ngSubmit)="submitForm(myForm)" #myForm="ngForm" novalidate>
+  <h2 class="form-signin-heading">Please add a new Journal</h2>
+  <label for="inputTitle" class="sr-only">Title</label>
+    <input id="inputTitle" class="form-control" placeholder="Title of Journal"  type="text" name="title" [(ngModel)]="title"
+          #myTitle="ngModel" minlength="2" required autofocus/>
+
+  <label for="inputContent" class="sr-only">Message</label>
+    <input type="text" name="content" id="inputContent" class="form-control" placeholder="Content" [(ngModel)]="content"
+          #myContent="ngModel" minlength="2" required />
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!myForm.form.valid">Create new Journal</button><br>
+  <div *ngIf="display">
+    <p class="alert alert-success" role="alert">Successfully saved the Journal</p>
+    </div>
+      <div *ngIf="myTitle.errors && (myTitle.dirty || myTitle.touched)">
+    <p class="alert alert-danger" role="alert" [hidden]="!myTitle.errors.minlength">
+      Title must be at least 2 characters long.
+    </p>
+  </div>
+    <div *ngIf="myContent.errors && (myContent.dirty || myContent.touched)">
+    <p class="alert alert-danger" role="alert" [hidden]="!myContent.errors.minlength">
+      Content must be at least 2 characters long.
+    </p>
+  </div>
+</form>
